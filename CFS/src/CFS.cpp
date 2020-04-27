@@ -240,16 +240,6 @@ public:
 	}
 
 
-
-
-
-
-
-
-
-
-
-
 	//------------
 	void leftRotate(NodePtr x)
 	{
@@ -434,7 +424,12 @@ public:
 
 	NodePtr LMostNode()
 	{
+		cout<<"Find leftmode node.."<<endl;
 		NodePtr node =  root;
+		if(node == TNULL){
+			cout<<"Empty tree"<<endl;
+			return TNULL;
+		}
 		while (node->left != TNULL)
 		{
 			node = node->left;
@@ -494,6 +489,8 @@ public:
 	RBTree oRBTree;
 	Node scheduler()
 	{
+		cout<<">>>>>>>>>"<<endl;
+
 		return *(oRBTree.LMostNode());
 	}
 
@@ -556,16 +553,21 @@ public:
 		addprocess(25);
 		addprocess(96);
 		oSch.oRBTree.printTree();
+		//sleep(5);
 
 		while(1){
 			Node elNode=oSch.scheduler();
+			cout<<"elNode.pid::"<<elNode.pid<<endl;
+			if(elNode.pid == -1){
+				break;
+			}
 			cout<<"eligible process::"<<endl;
 			elNode.print();
 			dispatcher(elNode);
 			oSch.oRBTree.printTree();
-			sleep(1);
+			//sleep(1);
 		}
-
+		cout<<"CFS Algo End.."<<endl;
 
 	}
 
@@ -575,7 +577,7 @@ public:
 
 
 int main() {
-	cout << "CFS scheduling algo" << endl; // prints !!!Hello World!!!
+	cout << "CFS scheduling algo start.." << endl; // prints !!!Hello World!!!
 	MainSystem oMainSystem;
 	oMainSystem.start();
 	return 0;
